@@ -21,4 +21,4 @@ def predictfun():
         return render_template('predict.html',predictions=finalPrediction)
     else:
         return redirect('/')
-app.run(debug=True)
+app.run()
