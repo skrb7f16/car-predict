@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pickle
 
 df=pd.read_csv('train.csv')
 df.drop('v.id',inplace=True,axis=1)
@@ -21,3 +22,5 @@ from sklearn.linear_model import LinearRegression
 lm=LinearRegression()
 
 lm.fit(X,y)
+
+pickle.dump(lm,open('model.pkl','wb'))

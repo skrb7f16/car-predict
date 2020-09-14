@@ -1,10 +1,12 @@
 from flask import Flask,render_template,request,redirect
-from model import lm
+import pickle
 import numpy as np
 
 app=Flask(__name__)
 
-@app.route('/', methods=['GET','POST'])
+model=pickle.load(open('model.pkl','rb'))
+
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -14,7 +16,7 @@ def predictfun():
     if request.method=="POST":
         features=[int(i) for i in request.form.values()]
         final_features=[np.array(features)]
-        predictions=lm.predict(final_features)
+        predictions=model.predict(final_features)
         finalPrediction=round(predictions[0],1)
         return render_template('predict.html',predictions=finalPrediction)
     else:
